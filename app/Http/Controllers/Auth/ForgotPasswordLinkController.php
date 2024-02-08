@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 class ForgotPasswordLinkController extends Controller
 {
-    public function show(Request $request ,$token)
+    public function show(Request $request)
     {
-        return view('forgot-password', ['token' => $token]);
+        return view('forgot-password', ['token' => $request->token]);
     }
 
     public function store(Request $request)

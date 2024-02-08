@@ -44,7 +44,7 @@
     </div>
 </div>
 <!-- ====== Banner Section End -->
-<section class="bg-[#F4F7FF] py-14 lg:py-[90px] dark:bg-dark">
+<section class="bg-[#F4F7FF] py-14 lg:py-[90px] dark:bg-dark container">
     <div class="container">
         <div class="flex flex-wrap -mx-4">
             <div class="w-full px-4">
@@ -56,9 +56,8 @@
                             <h1 class="text-4xl dark:text-white font-bold">Forget Password</h1>
                         </a>
                     </div>
-                    <form action="{{ route('Auth.forgetPasswordTrait') }}" method="post">
+                    <form class="container" action="{{ route('forgot') }}" method="post">
                         @csrf
-
                         <div class="mb-[22px]">
 
                             <div class="mb-[22px]">

@@ -34,8 +34,15 @@ Route::get('/dashboard',[NewsController::class,'show'])->name('dashboard');
 
 Route::get('/subscribe',[NewsController::class,'showSub'])->name('sub');
 
-Route::get('/forgot-password', [ForgotPasswordLinkController::class, 'show'])->name('forgot');
+/*Route::get('/forgot-password', [ForgotPasswordController::class, 'show'])->name('forgot')->name('password.reset');*/
+Route::get('/reset-password',function (){
+   return view('password.reset');
+})->name("reset");
 
-Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'store'])->name('forgot');
+Route::post('/request-password', [ForgotPasswordController::class, 'store'])->name('password.reset');
 
-Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'reset']);
+//zid form 3 inputs (email, password, confirm password)
+Route::get('/forgot-password',function (){
+    return view('password.email');
+});
+Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'reset'])->name('password.email');
