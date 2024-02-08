@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    private $redirectTo;
+
     public function register(){
         return view('register');
     }
 
 
-    public function registerPost(Request $request){
+    public function store(Request $request){
 
         $request->validate([
             'username' => 'required',
@@ -31,7 +33,7 @@ class AuthController extends Controller
 
         $user->save();
         return back()->with('success', 'Registration successful');
-        return view('register');
+
     }
 
     public function login(){
@@ -39,28 +41,19 @@ class AuthController extends Controller
     }
     public function loginPost(Request $request)
     {
-        $data=[
-            'email' => $request->email,
-            'password'=> $request->password,
-        ];
+        $request->validate([
+            'email' => ["request","string"],
+            'password'=> ["request","string"],
+        ]);
 
-        if(Auth::attempt($data)){
-            return redirect('/dashboard')->with('success','Good job');
+        if(Auth::guard("admin")->attempt($request->only('email','password'))) {
+            return redirect('/dashboard')->intended($this->redirectTo);
+        }else{
 
-            $credentials = $request->only('email', 'password');
-
-            if (Auth::attempt($credentials, $request->filled('remember'))) {
-                $request->session()->regenerate();
-
-                return redirect()->intended('/');
-            }
+           // return redirect()->back()->withInput(['email'=> $request->email])->withErrors(['errorResponse'=> 'these credentials do not match our records']);
+            return redirect()->route('welcome');
 
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
     }
-
-
 }

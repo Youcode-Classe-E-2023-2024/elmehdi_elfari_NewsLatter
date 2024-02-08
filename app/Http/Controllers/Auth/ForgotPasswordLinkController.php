@@ -9,24 +9,30 @@ use Illuminate\Support\Str;
 
 class ForgotPasswordLinkController extends Controller
 {
-    public function show()
+    public function show(Request $request ,$token)
     {
-        return view('forgot-password');
+        return view('forgot-password', ['token' => $token]);
     }
 
     public function store(Request $request)
     {
-        $user = User::where('email', $request->email);
-
-
-        if (!is_null($user)) {
-            $user->update(['remember_token' => Str::random(40)]);
-        } else {
-            return redirect()->back()->with('error', "Email not found in the system.");
-        }
-
-        // Add any additional logic or redirection you need here
-        return redirect()->route('your.desired.route');
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($request->password),
+                    'remember_token' => Str::random(64)
+                ])->save();
+            }
+        );
+        return $status == Password::PASSWORD_RESET
+            ? redirect()->route('Auth.login')->with('status', __($status))
+            : back()->withInput($request->only('email'))->withErrors(['email' => __($status)]);
     }
 }
 
