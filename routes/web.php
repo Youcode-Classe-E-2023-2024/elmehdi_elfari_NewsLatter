@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordLinkController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,31 +21,45 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[NewsController::class,'welcome'])->name('welcome');
-
-Route::get('/register',[AuthController::class,'register'])->name('Form-register');
-
-Route::post('/register',[authController::class,'store'])->name('register');
-
-Route::get('/login',[authController::class,'login'])->name('Form-login');
-
-Route::post('/login',[authController::class,'loginPost'])->name('login');
-
-Route::post('/logout', [Logoutcontroller::class, 'destroy'])->middleware('auth');
-
-Route::get('/dashboard',[NewsController::class,'show'])->name('dashboard');
-
-Route::get('/subscribe',[NewsController::class,'showSub'])->name('sub');
-
-/*Route::get('/forgot-password', [ForgotPasswordController::class, 'show'])->name('forgot')->name('password.reset');*/
-Route::get('/reset-password',function (){
-   return view('password.reset');
-})->name("reset");
-
-Route::post('/request-password', [ForgotPasswordController::class, 'store'])->name('password.reset');
-
-//zid form 3 inputs (email, password, confirm password)
-Route::get('/forgot-password',function (){
-    return view('password.email');
+/*Forget Password*/
+Route::get('/', function () {
+    return view('welcome');
 });
-Route::post('/forgot-password', [ForgotPasswordLinkController::class, 'reset'])->name('password.email');
+Route::get("register", [RegisterController::class, 'create'])->name('Form-register')
+    /*->middleware('guest')*/;
+Route::post("register", [RegisterController::class, 'store'])->name('register');
+Route::post('logout', [LogoutController::class, 'destroy'])
+    /*->middleware('auth')*/;
+Route::get("login", [LoginController::class, 'create'])->name('Form-login')
+    /*->middleware('guest')*/;
+Route::post("login", [LoginController::class, 'authenticate'])->name('login')
+    /*->name("login")*/;
+
+
+Route::post('/request', [ForgotPasswordLinkController::class, 'store']);
+Route::get('/request', [ForgotPasswordLinkController::class, 'create']);
+Route::post('/reset', [ForgotPasswordController::class, 'reset'])->name('reset');
+Route::get('password/reset/{token}', [ForgotPasswordController::class, 'create'])->name('password.reset');
+
+
+/*Temolate DAshboard*/
+Route::get('/dashboard',[DashboardController::class,'show'])->name('dashboard');
+
+/*Subscribe DAshboard*/
+Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
+
+Route::get('/subscribe', [SubscribeController::class, 'index'])->name('subscribe.section');
+
+
+/*Temolate DAshboard*/
+/*Route::get('/template', [TemplateController::class, 'manage_template'])->name('templates.manage-template');*/
+
+Route::get('/template', [TemplateController::class, 'show'])->name('templates.show');
+
+Route::post('/template', [TemplateController::class, 'store'])->name('templates.store')/*->middleware('auth')*/;
+
+Route::get('/template/{template}/edit', [TemplateController::class, 'edit'])->name('templates.edit');
+
+Route::put('/template/{template}', [TemplateController::class, 'update'])->name('templates.update');
+
+Route::delete('/template/{template}', [TemplateController::class, 'destroy'])->name('templates.destroy');

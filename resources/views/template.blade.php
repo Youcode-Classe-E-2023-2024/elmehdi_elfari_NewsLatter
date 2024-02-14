@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- Mirrored from webstrot.com/html/midadmin/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Feb 2024 14:56:36 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <title>Mid Dashboard Template</title>
 
@@ -26,13 +25,13 @@
     <link href="{{ asset('./css/style.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-gray-800">
 <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
     <div class="nano">
         <div class="nano-content">
             <div class="logo text-6xl"><a href="index.html"></a>Mehdi:)</div>
             <ul class="mt-5">
-                <li><a href="{{ route('dashboard') }}"><i class="fa fa-list"></i>Dashboard</a></li>
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-list"></i>Subscribe</a></li>
                 <li><a href="{{ route('subscribe.section') }}"><i class="fa fa-list"></i>Subscribe</a></li>
                 <li><a href="form-basic.html"><i class="ti-view-list-alt"></i>Media</a></li>
                 <li><a href="{{ route('templates.show') }}"><i class="fa fa-list"></i>Template</a></li>
@@ -41,64 +40,50 @@
         </div>
     </div>
 </div>
+<!-- /# sidebar -->
 
-<form action="{{ route('subscribe') }}" method="POST" class="wrapper w-full flex">
+<div class="w-5/12" style="margin-left: 28rem;margin-top: 5rem">
+    <div class="backdrop-blur-sm border-2 border-solid border-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-2 text-white">
+        <form action="{{ route('templates.store') }}" method="POST" enctype="multipart/form-data" class="container">
 
-    @csrf
-    <div class="content">
-        <header>
-            <h1>Subscribe Us</h1>
-        </header>
-        <section>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            </p>
-        </section>
-        <div>
-            <input type="email" name="email" placeholder="Enter your email" value="">
-            @error('email')
-            <div class="text-red-500">
-                {{ $message }}
+            @csrf
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-bold mb-2 text-green-500">Name:</label>
+                <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Template Name">
+                @error('name')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
             </div>
-            @enderror
-            <button style="padding: 12px;color: white;background-color: #0d71bb;border-radius: 26px;text-decoration: none">Let's go</button>
-        </div>
-    </div>
-</form>
-<{{--div class="col-lg-6" style="margin-left: 21rem">
-    <div class="card">
-        <div class="card-title">
-            <h4>New Orders</h4>
-        </div>
-
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    @foreach($subscribes as $subscribe)
-                        <tr>
-                            <td>{{ $subscribe->id }}</td>
-                            <td>{{ $subscribe->email }}</td>
-                            <td>
-                                <span class="badge badge-warning">Pending</span>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            <div class="mb-4">
+                <label for="subject" class="block text-sm font-bold mb-2 text-green-500">Subject:</label>
+                <input type="text" id="subject" name="subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Template Subject">
+                @error('subject')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
             </div>
-        </div>
+            <div class="mb-4">
+                <label for="content" class="block text-sm font-bold mb-2 text-green-500">Content:</label>
+                <textarea id="content" name="content" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Template Content"></textarea>
+                @error('content')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-4 text-white">
+                <label for="image" class="block text-sm font-bold mb-2 text-green-500">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                @error('image')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Template</button>
+            </div>
+        </form>
     </div>
 </div>
---}}
+
+</div>
+
 
 <!-- jquery vendor -->
 <script src=" {{ asset('./js/lib/jquery.min.js') }}"></script>
@@ -165,10 +150,8 @@
 <!-- scripit init-->
 
 <script src=" {{ asset('./js/dashboard1.js') }}"></script>
-
 </body>
 
 
-<!-- Mirrored from webstrot.com/html/midadmin/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Feb 2024 14:56:36 GMT -->
 </html>
 
