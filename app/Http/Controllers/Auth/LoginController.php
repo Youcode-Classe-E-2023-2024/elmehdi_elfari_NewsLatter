@@ -25,10 +25,10 @@ class LoginController extends Controller
         if (auth()->attempt($formFields, $request->filled('remember'))) {
             $request->session()->regenerate();
 
-            return redirect('/back')->with("login", 'true');
+            return redirect('dashboard')->with("login", 'true');
         }
-        /*return back()->withErrors(['email' => 'Invalid Credentials'])
-            ->onlyInput();*/
-        return view('Form-register');
+        return back()->withErrors(['email' => 'Invalid Credentials'])
+            ->onlyInput();
+        /*return view('login');*/
     }
 }

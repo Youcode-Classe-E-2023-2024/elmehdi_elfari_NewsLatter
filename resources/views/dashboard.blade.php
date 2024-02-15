@@ -34,7 +34,7 @@
             <ul class="mt-5">
                 <li><a href="{{ route('dashboard') }}"><i class="fa fa-list"></i>Dashboard</a></li>
                 <li><a href="{{ route('subscribe.section') }}"><i class="fa fa-list"></i>Subscribe</a></li>
-                <li><a href="form-basic.html"><i class="ti-view-list-alt"></i>Media</a></li>
+                <li><a href="{{ route('media') }}"><i class="ti-view-list-alt"></i>Media</a></li>
                 <li><a href="{{ route('templates.show') }}"><i class="fa fa-list"></i>Template</a></li>
 
             </ul>
@@ -281,9 +281,10 @@
                         <div class="card">
                             <div class="stat-widget-two">
                                 <div class="stat-content">
-                                    <div class="stat-text">Today Expenses </div>
+                                    <div class="stat-text">Subscribers </div>
                                     <div class="stat-digit">
-                                        <i class="fa fa-usd"></i>8500</div>
+                                        {{ $subscribe }}
+                                    </div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
@@ -295,9 +296,10 @@
                         <div class="card">
                             <div class="stat-widget-two">
                                 <div class="stat-content">
-                                    <div class="stat-text">Income Detail</div>
+                                    <div class="stat-text">Template</div>
                                     <div class="stat-digit">
-                                        <i class="fa fa-usd"></i>7800</div>
+                                        {{ $template }}
+                                    </div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
@@ -309,9 +311,10 @@
                         <div class="card">
                             <div class="stat-widget-two">
                                 <div class="stat-content">
-                                    <div class="stat-text">Task Completed</div>
+                                    <div class="stat-text">Media</div>
                                     <div class="stat-digit">
-                                        <i class="fa fa-usd"></i> 500</div>
+                                        {{ $template }}
+                                    </div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>

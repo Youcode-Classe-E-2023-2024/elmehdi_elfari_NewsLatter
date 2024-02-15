@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,7 @@ Route::get('password/reset/{token}', [ForgotPasswordController::class, 'create']
 
 
 /*Temolate DAshboard*/
-Route::get('/dashboard',[DashboardController::class,'show'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 /*Subscribe DAshboard*/
 Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
@@ -63,3 +64,9 @@ Route::get('/template/{template}/edit', [TemplateController::class, 'edit'])->na
 Route::put('/template/{template}', [TemplateController::class, 'update'])->name('templates.update');
 
 Route::delete('/template/{template}', [TemplateController::class, 'destroy'])->name('templates.destroy');
+
+
+/*Medias Dashboard*/
+Route::get('/media', [MediaController::class, 'index'])->name('media');
+Route::post('/media', [MediaController::class, 'store']);
+Route::delete('/media/{template}', [MediaController::class, 'delete'])->name('upload.delete');

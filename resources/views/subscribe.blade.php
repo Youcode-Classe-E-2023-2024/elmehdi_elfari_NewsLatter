@@ -34,7 +34,7 @@
             <ul class="mt-5">
                 <li><a href="{{ route('dashboard') }}"><i class="fa fa-list"></i>Dashboard</a></li>
                 <li><a href="{{ route('subscribe.section') }}"><i class="fa fa-list"></i>Subscribe</a></li>
-                <li><a href="form-basic.html"><i class="ti-view-list-alt"></i>Media</a></li>
+                <li><a href="{{ route('media') }}"><i class="ti-view-list-alt"></i>Media</a></li>
                 <li><a href="{{ route('templates.show') }}"><i class="fa fa-list"></i>Template</a></li>
 
             </ul>
@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<form action="{{ route('subscribe') }}" method="POST" class="wrapper w-full flex">
+{{--<form action="{{ route('subscribe') }}" method="POST" class="wrapper w-full flex">
 
     @csrf
     <div class="content">
@@ -61,11 +61,11 @@
                 {{ $message }}
             </div>
             @enderror
-            <button style="padding: 12px;color: white;background-color: #0d71bb;border-radius: 26px;text-decoration: none">Let's go</button>
+            <button style="padding: 12px;color: white;background-color: #0d71bb;border-radius: 26px;text-decoration: none">Subscribe</button>
         </div>
     </div>
-</form>
-<{{--div class="col-lg-6" style="margin-left: 21rem">
+</form>--}}
+<div class="col-lg-6" style="margin-left: 21rem;margin-top: 5rem">
     <div class="card">
         <div class="card-title">
             <h4>New Orders</h4>
@@ -98,7 +98,7 @@
         </div>
     </div>
 </div>
---}}
+
 
 <!-- jquery vendor -->
 <script src=" {{ asset('./js/lib/jquery.min.js') }}"></script>

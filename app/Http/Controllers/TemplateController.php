@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Models\Template;
 
@@ -12,6 +13,7 @@ class TemplateController extends Controller
     }*/
 
     public function show() {
+
         return view('template');
     }
 
@@ -32,8 +34,7 @@ class TemplateController extends Controller
         return redirect()->back();
     }
 
-
-   /* public function edit(Template $template) {
+    public function edit(Template $template) {
         $editing = true;
         return view('templates.manage-template', compact('template', 'editing'));
     }
@@ -57,5 +58,5 @@ class TemplateController extends Controller
     public function destroy(Template $template) {
         $template->delete();
         return redirect()->route('main');
-    }*/
+    }
 }

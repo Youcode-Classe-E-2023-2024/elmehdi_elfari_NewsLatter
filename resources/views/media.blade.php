@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<!-- Mirrored from webstrot.com/html/midadmin/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Feb 2024 14:56:36 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,13 +27,13 @@
     <link href="{{ asset('./css/style.css') }}" rel="stylesheet">
 </head>
 
-<body class="bg-gray-800">
+<body class="bg-gray-400">
 <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
     <div class="nano">
         <div class="nano-content">
             <div class="logo text-6xl"><a href="index.html"></a>Mehdi:)</div>
             <ul class="mt-5">
-                <li><a href="{{ route('dashboard') }}"><i class="fa fa-list"></i>Subscribe</a></li>
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-list"></i>Dashboard</a></li>
                 <li><a href="{{ route('subscribe.section') }}"><i class="fa fa-list"></i>Subscribe</a></li>
                 <li><a href="{{ route('media') }}"><i class="ti-view-list-alt"></i>Media</a></li>
                 <li><a href="{{ route('templates.show') }}"><i class="fa fa-list"></i>Template</a></li>
@@ -40,49 +42,30 @@
         </div>
     </div>
 </div>
-<!-- /# sidebar -->
+<div class="flex flex-wrap" style="margin-left: 18rem">
+    @foreach ($templates as $template)
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mx-3 my-4 bg-white rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105">
+            @if($template->getFirstMedia('media'))
+                <img class="w-full h-32 object-cover" src="{{ $template->getFirstMedia('media')->getUrl() }}" alt="Template Image">
+            @endif
+            <div class="px-4 py-2">
+                <div class="font-bold text-lg mb-2">{{ $template->subject }}</div>
+                <p class="text-gray-700 text-sm">{{ $template->content }}</p>
+            </div>
+                <form action="{{ route('upload.delete',  $template->id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="bg-red-500 inline-block py-2 px-6 my-2 ml-5 border border-[#E5E7EB] rounded-full text-base text-white font-medium hover:border-primary hover:bg-primary transition">
+                        Delete
+                    </button>
+                </form>
 
-<div class="w-5/12" style="margin-left: 26rem;margin-top: 3rem">
-    <div class="backdrop-blur-sm border-2 border-solid border-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-2 text-white">
-        <form action="{{ route('templates.store') }}" method="POST" enctype="multipart/form-data" class="container">
-
-            @csrf
-            <div class="mb-4">
-                <label for="name" class="block text-sm font-bold mb-2 text-green-500">Name:</label>
-                <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Template Name">
-                @error('name')
-                <div class="text-red-500">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-4">
-                <label for="subject" class="block text-sm font-bold mb-2 text-green-500">Subject:</label>
-                <input type="text" id="subject" name="subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Template Subject">
-                @error('subject')
-                <div class="text-red-500">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-4">
-                <label for="content" class="block text-sm font-bold mb-2 text-green-500">Content:</label>
-                <textarea id="content" name="content" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Template Content"></textarea>
-                @error('content')
-                <div class="text-red-500">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="mb-4 text-white">
-                <label for="image" class="block text-sm font-bold mb-2 text-green-500">Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @error('image')
-                <div class="text-red-500">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="flex items-center justify-between">
-                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Template</button>
-            </div>
-        </form>
-    </div>
+        </div>
+    @endforeach
 </div>
 
-</div>
+
+
 
 
 <!-- jquery vendor -->
@@ -150,8 +133,11 @@
 <!-- scripit init-->
 
 <script src=" {{ asset('./js/dashboard1.js') }}"></script>
+
 </body>
 
 
+<!-- Mirrored from webstrot.com/html/midadmin/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Feb 2024 14:56:36 GMT -->
 </html>
+
 

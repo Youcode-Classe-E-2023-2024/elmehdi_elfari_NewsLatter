@@ -17,9 +17,16 @@
                 <div class="subscription-wrapper " style="margin-top: 6rem; margin-left: 2.2rem">
                     <div class="d-flex subscription-content justify-content-between align-items-center flex-column flex-md-row text-center text-md-left">
                         <h3 class="flex-fill text-5xl">Subscribe to our newsletter</h3>
-                        <form action="#" class="row flex-fill">
+                        <form action="{{ route('subscribe') }}" method="POST" >
+
+                            @csrf
                             <div class="col-lg-7 my-md-2 my-2">
                                 <input type="email" style="width: 35%" class="form-control px-4 border-0 w-100 text-center text-md-left" id="email" placeholder="Your Email" name="email">
+                                @error('email')
+                                <div class="text-red-500">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-lg-5 my-md-2 my-2">
                                 <button type="submit" class="btn btn-primary btn-lg border-0 w-100">Subscribe Now</button>
