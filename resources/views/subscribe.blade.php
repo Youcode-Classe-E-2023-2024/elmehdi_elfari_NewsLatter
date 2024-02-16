@@ -42,29 +42,6 @@
     </div>
 </div>
 
-{{--<form action="{{ route('subscribe') }}" method="POST" class="wrapper w-full flex">
-
-    @csrf
-    <div class="content">
-        <header>
-            <h1>Subscribe Us</h1>
-        </header>
-        <section>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            </p>
-        </section>
-        <div>
-            <input type="email" name="email" placeholder="Enter your email" value="">
-            @error('email')
-            <div class="text-red-500">
-                {{ $message }}
-            </div>
-            @enderror
-            <button style="padding: 12px;color: white;background-color: #0d71bb;border-radius: 26px;text-decoration: none">Subscribe</button>
-        </div>
-    </div>
-</form>--}}
 <div class="col-lg-6" style="margin-left: 21rem;margin-top: 5rem">
     <div class="card">
         <div class="card-title">
@@ -72,6 +49,16 @@
         </div>
 
         <div class="card-body">
+            <button onclick="window.location='{{ route('generate.pdf') }}'" aria-expanded="false" aria-haspopup="menu" id=":r5:"
+                    class="relative middle none font-sans font-medium text-center uppercase transition-all
+                        disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px]
+                        h-8 max-h-[32px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10
+                        active:bg-blue-gray-500/30" type="button">
+                  <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                    <svg enable-background="new 0 0 50 50" height="30px" id="Layer_1"
+                         version="1.1" viewBox="0 0 50 50" width="30px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect fill="none" height="50" width="50"/><circle cx="43" cy="21" r="2"/><path d="M40,15V1H10v14" fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M40,29v20H10V29H40z" fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M10,40H3  c-1.104,0-2-0.896-2-2V17c0-1.104,0.896-2,2-2h44c1.104,0,2,0.896,2,2v21c0,1.104-0.896,2-2,2h-7" fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><line fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" x1="35" x2="15" y1="35" y2="35"/><line fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" x1="31" x2="15" y1="39" y2="39"/><line fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" x1="35" x2="15" y1="43" y2="43"/></svg>
+                  </span>
+            </button>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -88,7 +75,7 @@
                             <td>{{ $subscribe->id }}</td>
                             <td>{{ $subscribe->email }}</td>
                             <td>
-                                <span class="badge badge-warning">Pending</span>
+                                <span class="badge badge-warning ">{{ $subscribe->status }}</span>
                             </td>
                         </tr>
                     @endforeach

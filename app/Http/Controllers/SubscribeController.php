@@ -12,13 +12,14 @@ class SubscribeController extends Controller
         return view('subscribe',compact('subscribes'));
     }
 
-    public function subscribe() {
-        $validated = request()->validate([
-            'email' => 'required|email|unique:subscribers,email'
+    public function subscribe(Request $request) {
+        $validated = $request->validate([
+            'email' => 'required|email|unique:subscribers,email',
         ]);
 
         Subscriber::create($validated);
 
-        return redirect(route('subscribe.section'));
+        return redirect(route('subscribe'));
     }
+
 }

@@ -34,7 +34,6 @@ class RolePermissionSeeder extends Seeder
 
 
 
-        // Assign permissions to admin role
         $adminRole->givePermissionTo([
             $assignRolesPermission,
             $deleteUsersPermission,
